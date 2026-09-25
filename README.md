@@ -1,4 +1,8 @@
-![Prosper Loan Analysis — from data to visual findings](docs/cover.svg)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/cover.svg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/cover-light.svg">
+  <img alt="Prosper Loan Analysis — From loan data to visual findings" src="docs/cover.svg" width="1200">
+</picture>
 
 # Prosper Loan Analysis
 
