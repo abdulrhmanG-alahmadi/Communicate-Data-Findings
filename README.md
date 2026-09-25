@@ -1,29 +1,62 @@
-# Communicate-Data-Findings
+![Prosper Loan Analysis — from data to visual findings](docs/cover.svg)
 
+# Prosper Loan Analysis
 
-## data set
+**Exploring 113,937 loans through univariate, bivariate, and multivariate visualization.**
 
-The dataset is individual loan data set provided by the  lending company Prosper. This data set contains 113,937 loans with 81 variables on each loan, including loan amount, borrower rate (or interest rate), current loan status, borrower income, and many others. and i choose it as i was intrested in explooring the data provided by this company
+[Open the notebook](exploration%20%28with%20jitter%29.ipynb) · [Preview](#preview) · [Reproduce](#reproduce-the-analysis)
 
-## Summary of Findings
+## Preview
 
-It is noticed that EmploymentStatus and StatedMonthlyIncome affect both of the main features (BorrowerAPR and ProsperScore)
-People who are not employed receive low score and high interest rate compared to the employed
-The higher the income, the higher the score and the lower the interest rate
+The following chart is an existing saved output from the notebook, extracted without rerunning or changing the data.
 
-It was observed that EmploymentStatus has a relation with ProsperRating where the un-employed are mostly given a High Risk rating
+![Heat map of borrower APR and ProsperScore from the saved notebook](docs/chart-32.png)
 
-Number of Defaulted loans for Self-employed people are larger than those for Not Employed
+## Project story
 
-Intersting to notice that Defaulted loans decreased after Q4-2008, also Current loans increased rapidly in 2013 (and it is logic that no Current loans before 2011 as the maximum loan term is 5 years)
+**Problem.** A wide loan dataset is difficult to interpret without narrowing the questions and examining distributions before comparing groups.
 
+**Approach.** Start with 81 variables, select 31 columns of interest, clean data types, and explore borrower APR, ProsperScore, income, loan amount, and employment status with pandas, Matplotlib, and Seaborn.
 
-## Key Insights for Presentation
-i found 36 observations and and i used plots to visualize it hence i concluded some points here are the most important one's in my opinion 
+**Current result.** A notebook with saved charts and written observations. The work demonstrates exploratory analysis and visual communication; it is not a predictive credit model or evidence of causal effects.
 
-i found  out that the imcome almost follows a normal distribution of income.Interesting to see the peak around $5k of it
-It is obvious that most amounts delinquent falls around $700 and $1000
-Most borrowers get Prosper Rating of 'C'
-States California, Texas and New York have the 3 biggest numbers of loans originated in that period of time
-Most of the people taking loans have verifiable income, which lead us to the conclusion that it might be a requirement for taking loans
-it is noticed that mostly Cosmetic Procedure are given higer interest rates
+## Findings explored
+
+- The saved analysis shows a negative association between ProsperScore and borrower APR.
+- Income and loan amounts have long-tailed distributions; log scales and explicit axis limits reveal patterns obscured in the original views.
+- The notebook compares APR and risk-score distributions across employment groups and loan statuses.
+- Time plots describe loan origination patterns in the historical dataset, not current lending conditions.
+
+These are descriptive observations. Missing values, group sizes, selected axis limits, and the age of the source data affect interpretation.
+
+## Analysis flow
+
+```mermaid
+flowchart LR
+    D[Prosper loan CSV] --> W[Select columns and clean types]
+    W --> U[Univariate distributions]
+    U --> B[Bivariate relationships]
+    B --> M[Multivariate comparisons]
+    M --> F[Charts and written findings]
+```
+
+## Reproduce the analysis
+
+The CSV is **not included**. Obtain the original `prosperLoanData.csv` dataset separately and place it beside the notebook. The saved outputs remain readable on GitHub without the CSV.
+
+```sh
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install jupyter pandas numpy matplotlib seaborn
+jupyter notebook
+```
+
+Open `exploration (with jitter).ipynb` and review the cells before running them. This older notebook has no dependency lockfile; recent pandas/Seaborn releases may require API adjustments. Some plots use random samples without a fixed seed, so regenerated figures can differ.
+
+## Tools and artifacts
+
+Python · pandas · NumPy · Matplotlib · Seaborn · Jupyter
+
+- [Complete notebook with saved outputs](exploration%20%28with%20jitter%29.ipynb)
+- [Loan amount distribution](docs/chart-0.png)
+- [License](LICENSE)
